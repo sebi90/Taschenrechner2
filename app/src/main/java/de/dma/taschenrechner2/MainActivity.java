@@ -87,7 +87,6 @@ public class MainActivity extends Activity implements SensorEventListener{
 
             default:
                 return super.onOptionsItemSelected(item);
-
         }
 
     }
@@ -142,7 +141,6 @@ public class MainActivity extends Activity implements SensorEventListener{
         super.onRestoreInstanceState(savedInstanceState);
         textView.setText(savedInstanceState.getString("DISPLAY_TEXT"));
         setTextButton(savedInstanceState.getInt("BUTTON_SIZE"));
-
     }
 
 
@@ -315,10 +313,6 @@ public class MainActivity extends Activity implements SensorEventListener{
         {
             Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
         }
-        catch (ArithmeticException e)
-        {
-            Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
-        }
 
     }
     public boolean check(String input)
@@ -327,11 +321,7 @@ public class MainActivity extends Activity implements SensorEventListener{
         {
             return true;
         }
-        else
-        {
             return false;
-        }
-
     }
 
 
