@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="customNumberButtons" parent="AppTheme">
+    <style name="customNumberButtons">
 
         <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_width">fill_parent</item>
@@ -11,21 +11,28 @@
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:layout_marginRight">2dp</item>
         <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:textSize">22dp</item>
+    </style>
+
+    <style name="customButtons" parent="customNumberButtons">
+        <item name="android:background">@drawable/custom_button</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="FontSizeSmall" parent="customNumberButtons">
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="FontSizeMedium" parent="customNumberButtons">
         <item name="android:textSize">25dp</item>
     </style>
 
-    <style name="customButtons" parent="AppTheme">
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:onClick">buttonOnClick</item>
-        <item name="android:background">@drawable/custom_button</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:layout_marginBottom">2dp</item>
-        <item name="android:layout_marginTop">2dp</item>
-        <item name="android:layout_marginRight">2dp</item>
-        <item name="android:layout_marginLeft">2dp</item>
-        <item name="android:textSize">25dp</item>
+    <style name="FontSizeLarge" parent="customNumberButtons">
+        <item name="android:textSize">35dp</item>
     </style>
+
+
+
 
 
 </resources>

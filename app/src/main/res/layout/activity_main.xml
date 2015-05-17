@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/rootLayout">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25dp"
         android:id="@+id/textView1"
         android:layout_weight="1"
         android:background="#CCFFFF"/>
@@ -51,19 +52,19 @@
         <Button
             style="@style/customNumberButtons"
             android:text="@string/seven"
-            android:id="@+id/buttonSeven"
+            android:id="@+id/button_7"
             android:layout_weight="1" />
 
         <Button
             style="@style/customNumberButtons"
             android:text="@string/eight"
-            android:id="@+id/buttonEight"
+            android:id="@+id/button_8"
             android:layout_weight="1" />
 
         <Button
             style="@style/customNumberButtons"
             android:text="@string/nine"
-            android:id="@+id/buttonNine"
+            android:id="@+id/button_9"
             android:layout_weight="1" />
 
         <Button
@@ -82,19 +83,19 @@
         <Button
             style="@style/customNumberButtons"
             android:text="@string/four"
-            android:id="@+id/buttonFour"
+            android:id="@+id/button_4"
             android:layout_weight="1" />
 
         <Button
             style="@style/customNumberButtons"
             android:text="@string/five"
-            android:id="@+id/buttonFive"
+            android:id="@+id/button_5"
             android:layout_weight="1" />
 
         <Button
             style="@style/customNumberButtons"
             android:text="@string/six"
-            android:id="@+id/buttonSix"
+            android:id="@+id/button_6"
             android:layout_weight="1" />
 
         <Button
@@ -113,19 +114,19 @@
         <Button
             style="@style/customNumberButtons"
             android:text="@string/one"
-            android:id="@+id/buttonOne"
+            android:id="@+id/button_1"
             android:layout_weight="1" />
 
         <Button
             style="@style/customNumberButtons"
             android:text="@string/two"
-            android:id="@+id/buttonTwo"
+            android:id="@+id/button_2"
             android:layout_weight="1" />
 
         <Button
             style="@style/customNumberButtons"
             android:text="@string/three"
-            android:id="@+id/buttonThree"
+            android:id="@+id/button_3"
             android:layout_weight="1" />
 
         <Button
@@ -144,7 +145,7 @@
         <Button
             style="@style/customNumberButtons"
             android:text="@string/zero"
-            android:id="@+id/buttonZero"
+            android:id="@+id/button_0"
             android:layout_weight="2"/>
 
         <Button

@@ -1,15 +1,22 @@
 package de.dma.taschenrechner2;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.TypedArray;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +29,12 @@ public class MainActivity extends Activity implements SensorEventListener{
     TextView textView;
     String text;
     String rest;
-    Character lastItem;
     Button button, clearButton;
     Expression e;
     double result;
     SensorManager mSensorManager;
     Sensor mAccelerometer;
+    int buttonFontSize = 22;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,6 +53,7 @@ public class MainActivity extends Activity implements SensorEventListener{
         });
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -53,6 +61,88 @@ public class MainActivity extends Activity implements SensorEventListener{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id)
+        {
+            case R.id.itemSmall:
+                setTextButton(12);
+                return true;
+
+            case R.id.itemMedium:
+                setTextButton(22);
+                return true;
+
+            case R.id.itemLarge:
+                setTextButton(32);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
+    public void setTextButton(int i)
+    {
+        buttonFontSize = i;
+        Log.d("Button", i +"");
+
+        //*
+        textView.setTextSize(buttonFontSize);
+
+        for (int j = 0; j <= 9; j++)
+        {
+            int id = getResources().getIdentifier("button_"+j, "id", getPackageName());
+            Button but = (Button) findViewById(id);
+            but.setTextSize(buttonFontSize);
+        }
+
+        Button but = (Button) findViewById(R.id.buttonComma);
+        but.setTextSize(buttonFontSize);
+
+        /*/
+
+        /*
+
+        ViewGroup layout = (ViewGroup) findViewById(R.id.rootLayout);
+        for(int j = 0; j < layout.getChildCount(); j++)
+        {
+            View v = layout.getChildAt(j);
+            if (v instanceof Button)
+            {
+                Button b = (Button) v;
+                b.setTextSize(buttonFontSize);
+            }
+        }
+        */
+
+
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("DISPLAY_TEXT", textView.getText().toString());
+        outState.putInt("BUTTON_SIZE", buttonFontSize );
+
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        textView.setText(savedInstanceState.getString("DISPLAY_TEXT"));
+        setTextButton(savedInstanceState.getInt("BUTTON_SIZE"));
+
     }
 
 
@@ -77,8 +167,8 @@ public class MainActivity extends Activity implements SensorEventListener{
             case R.id.buttonPlusMinus:
                 if(text.length() != 0)
                 {
-                    if(!text.substring(0,1).equals("-")) {
-                        textView.setText("-" + "" + text);
+                    if(!text.substring(0,1).equals(getResources().getString(R.string.minus))) {
+                        textView.setText(getResources().getString(R.string.minus) + "" + text);
                     }
                     else
                     {
@@ -91,7 +181,7 @@ public class MainActivity extends Activity implements SensorEventListener{
                 if (text.length() != 0 && check(text.substring(text.length() - 1, text.length()))) {
                     Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
                 } else {
-                    textView.setText(text + ".");
+                    textView.setText(text + getResources().getString(R.string.point));
                 }
                 break;
 
@@ -99,7 +189,7 @@ public class MainActivity extends Activity implements SensorEventListener{
                 if (text.length() != 0 && check(text.substring(text.length() - 1, text.length()))) {
                     Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
                 } else {
-                    textView.setText(text + "+");
+                    textView.setText(text + getResources().getString(R.string.plus));
                 }
                 break;
 
@@ -107,7 +197,7 @@ public class MainActivity extends Activity implements SensorEventListener{
                 if (text.length() != 0 && check(text.substring(text.length() - 1, text.length()))) {
                     Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
                 } else {
-                    textView.setText(text + "-");
+                    textView.setText(text + getResources().getString(R.string.minus));
                 }
                 break;
 
@@ -115,7 +205,7 @@ public class MainActivity extends Activity implements SensorEventListener{
                 if (text.length() != 0 && check(text.substring(text.length() - 1, text.length()))) {
                     Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
                 } else {
-                    textView.setText(text + "*");
+                    textView.setText(text + getResources().getString(R.string.multiply));
                 }
                 break;
 
@@ -123,7 +213,7 @@ public class MainActivity extends Activity implements SensorEventListener{
                 if (text.length() != 0 && check(text.substring(text.length() - 1, text.length()))) {
                     Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
                 } else {
-                    textView.setText(text + "/");
+                    textView.setText(text + getResources().getString(R.string.divide));
                 }
                 break;
 
@@ -157,8 +247,20 @@ public class MainActivity extends Activity implements SensorEventListener{
 
             case R.id.buttonFak:
                 if(text.length() != 0) {
-                    text = text + "!";
-                    buildExpression(text);
+                    double value = 1.0;
+                    try
+                    {
+                        double number = Double.parseDouble(text);
+                        for (double i = 1.0; i <= number; i+=1.0)
+                        {
+                            value *= i;
+                        }
+                        textView.setText(value +"");
+                    }
+                    catch (IllegalArgumentException e)
+                    {
+                        Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
 
@@ -185,13 +287,13 @@ public class MainActivity extends Activity implements SensorEventListener{
 
             case R.id.buttonEx:
                 if(text.length() != 0) {
-                    text = "e^" + text;
+                    text = "exp(" + text +")";
                     buildExpression(text);
                 }
                 break;
 
             case R.id.buttonPi:
-                textView.setText(text + "3.1415926536");
+                textView.setText(text + Math.PI);
                 break;
 
             default:
@@ -204,9 +306,20 @@ public class MainActivity extends Activity implements SensorEventListener{
 
     public void buildExpression(String text)
     {
-        e = new ExpressionBuilder(text).build();
-        result = e.evaluate();
-        textView.setText(result + "");
+        try {
+            e = new ExpressionBuilder(text).build();
+            result = e.evaluate();
+            textView.setText(result + "");
+        }
+        catch (IllegalArgumentException e)
+        {
+            Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
+        }
+        catch (ArithmeticException e)
+        {
+            Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
+        }
+
     }
     public boolean check(String input)
     {
@@ -221,23 +334,30 @@ public class MainActivity extends Activity implements SensorEventListener{
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
+        /*if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+        {
+            long curTime = System.currentTimeMillis();
+
+            if((curTime - lastUpdate) > 100)
+            {
+                long diffTime = (curTime -lastUpdate);
+                lastUpdate = curTime;
+
+                float x = event.values[0];
+
+
+                float speed = Math.abs(x + y + z - last_x -last_y - last_y) / diffTime * 10000;
+
+                last_x = x;
+
+
+            }
+        }
+        //Toast.makeText(getApplicationContext(), "sensor" , Toast.LENGTH_SHORT).show();
 
         /*text = (String) textView.getText();
         if(text.length() != 0) {
