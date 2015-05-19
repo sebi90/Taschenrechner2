@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements SensorEventListener{
     double result;
     SensorManager mSensorManager;
     Sensor mAccelerometer;
-    int buttonFontSize = 22;
+    int buttonFontSize = R.style.FontSizeMedium;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -74,15 +74,15 @@ public class MainActivity extends Activity implements SensorEventListener{
         switch (id)
         {
             case R.id.itemSmall:
-                setTextButton(12);
+                setTextButton(R.style.FontSizeSmall);
                 return true;
 
             case R.id.itemMedium:
-                setTextButton(22);
+                setTextButton(R.style.FontSizeMedium);
                 return true;
 
             case R.id.itemLarge:
-                setTextButton(32);
+                setTextButton(R.style.FontSizeLarge);
                 return true;
 
             default:
@@ -94,39 +94,15 @@ public class MainActivity extends Activity implements SensorEventListener{
     public void setTextButton(int i)
     {
         buttonFontSize = i;
-        Log.d("Button", i +"");
-
-        //*
-        textView.setTextSize(buttonFontSize);
-
+        textView.setTextAppearance(this, buttonFontSize);
         for (int j = 0; j <= 9; j++)
         {
             int id = getResources().getIdentifier("button_"+j, "id", getPackageName());
             Button but = (Button) findViewById(id);
-            but.setTextSize(buttonFontSize);
+            but.setTextAppearance(this, i);
         }
-
         Button but = (Button) findViewById(R.id.buttonComma);
-        but.setTextSize(buttonFontSize);
-
-        /*/
-
-        /*
-
-        ViewGroup layout = (ViewGroup) findViewById(R.id.rootLayout);
-        for(int j = 0; j < layout.getChildCount(); j++)
-        {
-            View v = layout.getChildAt(j);
-            if (v instanceof Button)
-            {
-                Button b = (Button) v;
-                b.setTextSize(buttonFontSize);
-            }
-        }
-        */
-
-
-
+        but.setTextAppearance(this, buttonFontSize);
     }
 
     @Override
