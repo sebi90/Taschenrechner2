@@ -94,6 +94,7 @@ public class MainActivity extends Activity implements SensorEventListener{
     public void setTextButton(int i)
     {
         buttonFontSize = i;
+
         textView.setTextAppearance(this, buttonFontSize);
         for (int j = 0; j <= 9; j++)
         {
