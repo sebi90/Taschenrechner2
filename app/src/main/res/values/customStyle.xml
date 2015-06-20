@@ -18,7 +18,13 @@
         <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
-    
+
+    <style name="customEvalButton" parent="customNumberButtons">
+        <item name="android:background">@drawable/custom_eval_button</item>
+
+    </style>
+
+
     <style name="FontSizeSmall" parent="customNumberButtons">
         <item name="android:textSize">12dp</item>
     </style>

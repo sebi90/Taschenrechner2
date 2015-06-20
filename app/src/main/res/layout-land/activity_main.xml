@@ -211,7 +211,7 @@
         <Button
             style="@style/customNumberButtons"
             android:text="@string/point"
-            android:id="@+id/buttonComma"
+            android:id="@+id/buttonPoint"
             android:layout_weight="5" />
 
         <Button

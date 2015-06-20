@@ -27,8 +27,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 public class MainActivity extends Activity implements SensorEventListener{
 
     TextView textView;
-    String text;
-    String rest;
+    String text, rest;
     Button button, clearButton;
     Expression e;
     double result;
@@ -94,7 +93,6 @@ public class MainActivity extends Activity implements SensorEventListener{
     public void setTextButton(int i)
     {
         buttonFontSize = i;
-
         textView.setTextAppearance(this, buttonFontSize);
         for (int j = 0; j <= 9; j++)
         {
@@ -102,7 +100,7 @@ public class MainActivity extends Activity implements SensorEventListener{
             Button but = (Button) findViewById(id);
             but.setTextAppearance(this, i);
         }
-        Button but = (Button) findViewById(R.id.buttonComma);
+        Button but = (Button) findViewById(R.id.buttonPoint);
         but.setTextAppearance(this, buttonFontSize);
     }
 
@@ -152,7 +150,7 @@ public class MainActivity extends Activity implements SensorEventListener{
                 }
                 break;
 
-            case R.id.buttonComma:
+            case R.id.buttonPoint:
                 if (text.length() != 0 && check(text.substring(text.length() - 1, text.length()))) {
                     Toast.makeText(getApplicationContext(), "ungültige Eingabe", Toast.LENGTH_SHORT).show();
                 } else {
