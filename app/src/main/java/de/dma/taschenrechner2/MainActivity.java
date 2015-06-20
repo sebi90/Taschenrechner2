@@ -9,8 +9,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,37 +60,47 @@ public class MainActivity extends Activity implements SensorEventListener{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.settings, menu);
         return true;
     }
 
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.preferences);
+        }
+
+    }
+
+    public static class FragmentActivity extends Activity {
+        protected void onCreate(Bundle savedInstanceState){
+            super.onCreate(savedInstanceState);
+            getFragmentManager().beginTransaction()
+                    .replace(android.R.id.content, new SettingsFragment())
+                    .commit();
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         switch (id)
         {
-            case R.id.itemSmall:
-                setTextButton(R.style.FontSizeSmall);
-                return true;
-
-            case R.id.itemMedium:
-                setTextButton(R.style.FontSizeMedium);
-                return true;
-
-            case R.id.itemLarge:
-                setTextButton(R.style.FontSizeLarge);
+            case R.id.menu_settings:
+                // Display the fragment as the main content.
+                Intent intent = new Intent();
+                intent.setClass(this, FragmentActivity.class);
+                startActivityForResult(intent,0);
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
+
 
     public void setTextButton(int i)
     {

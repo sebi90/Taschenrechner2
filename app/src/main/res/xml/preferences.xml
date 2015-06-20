@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Schriftgröße">
+        <CheckBoxPreference android:key="checkBox1"
+            android:summary="On/Off"
+            android:title="Title"
+            android:defaultValue="false"/>
+        <CheckBoxPreference android:key="checkBox2"
+            android:summary="On/Off"
+            android:title="Title"
+            android:defaultValue="false"/>
+        <CheckBoxPreference android:key="checkBox3"
+            android:summary="On/Off"
+            android:title="Title"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Themes">
+        <ListPreference
+            android:key="pref_key_theme"
+            android:title="Theme">
+
+        </ListPreference>
+    </PreferenceCategory>
+</PreferenceScreen>
