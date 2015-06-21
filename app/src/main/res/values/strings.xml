@@ -35,6 +35,26 @@
     <string name="log">log</string>
     <string name="ex">e^x</string>
 
+    <string-array name="listFontOptions" >
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
 
+    <string-array name="listFontValues" >
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="listThemesOptions" >
+        <item>Theme1</item>
+        <item>Theme2</item>
+    </string-array>
+
+    <string-array name="listThemesValues" >
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 
 </resources>

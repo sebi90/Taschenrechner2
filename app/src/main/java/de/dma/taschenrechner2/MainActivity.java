@@ -3,6 +3,7 @@ package de.dma.taschenrechner2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,6 +11,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.text.Layout;
 import android.util.Log;
 import android.view.Display;
@@ -25,6 +27,8 @@ import android.widget.Toast;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends Activity implements SensorEventListener{
 
@@ -35,7 +39,11 @@ public class MainActivity extends Activity implements SensorEventListener{
     double result;
     SensorManager mSensorManager;
     Sensor mAccelerometer;
-    int buttonFontSize = R.style.FontSizeMedium;
+    int buttonFontSize = R.style.ButtonFontSizeMedium;
+    int displayFontSize = R.style.DisplayFontSizeMedium;
+    int themeStyleNumberButtons = R.style.customNumberButtons;
+    int themeStyleButtons = R.style.customButtons;
+    private static final int RESULT_SETTINGS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -93,7 +101,7 @@ public class MainActivity extends Activity implements SensorEventListener{
                 // Display the fragment as the main content.
                 Intent intent = new Intent();
                 intent.setClass(this, FragmentActivity.class);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent,RESULT_SETTINGS);
                 return true;
 
             default:
@@ -101,16 +109,84 @@ public class MainActivity extends Activity implements SensorEventListener{
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode)
+        {
+            case RESULT_SETTINGS:
+                setPrefs();
+        }
+    }
 
-    public void setTextButton(int i)
+    private void setPrefs()
     {
-        buttonFontSize = i;
-        textView.setTextAppearance(this, buttonFontSize);
+        Log.d("myTest", buttonFontSize+"");
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+        String buttonTextSize = sharedPreferences.getString("pref_key_buttons", String.valueOf(buttonFontSize));
+        String displayTextSize = sharedPreferences.getString("pref_key_display", String.valueOf(displayFontSize));
+        String theme = sharedPreferences.getString("pref_key_theme", String.valueOf(themeStyleNumberButtons));
+
+        setTextButton(Integer.parseInt(buttonTextSize));
+        setTextDisplay(Integer.parseInt(displayTextSize));
+        //setThemeStyle(Integer.parseInt(theme));
+    }
+
+    private void setThemeStyle(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                themeStyleNumberButtons = R.style.customNumberButtons;
+                themeStyleButtons = R.style.customButtons;
+                break;
+            case 2:
+                themeStyleNumberButtons = R.style.customNumberButtons2;
+                themeStyleButtons = R.style.customButtons2;
+                break;
+        }
+
+
+    }
+    private void setTextDisplay(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                displayFontSize = R.style.DisplayFontSizeSmall;
+                break;
+            case 2:
+                displayFontSize = R.style.DisplayFontSizeMedium;
+                break;
+            case 3:
+                displayFontSize = R.style.DisplayFontSizeLarge;
+                break;
+        }
+        textView.setTextAppearance(this, displayFontSize);
+    }
+
+    private void setTextButton(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                buttonFontSize = R.style.ButtonFontSizeSmall;
+                break;
+            case 2:
+                buttonFontSize = R.style.ButtonFontSizeMedium;
+                break;
+            case 3:
+                buttonFontSize = R.style.ButtonFontSizeLarge;
+                break;
+
+        }
         for (int j = 0; j <= 9; j++)
         {
             int id = getResources().getIdentifier("button_"+j, "id", getPackageName());
             Button but = (Button) findViewById(id);
-            but.setTextAppearance(this, i);
+            but.setTextAppearance(this, buttonFontSize);
         }
         Button but = (Button) findViewById(R.id.buttonPoint);
         but.setTextAppearance(this, buttonFontSize);

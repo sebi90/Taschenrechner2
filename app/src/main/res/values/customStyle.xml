@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
     <style name="customNumberButtons">
 
         <item name="android:layout_height">fill_parent</item>
@@ -24,17 +25,35 @@
 
     </style>
 
+    <style name="customNumberButtons2" parent="customButtons">
+    </style>
 
-    <style name="FontSizeSmall" parent="customNumberButtons">
+    <style name="customButtons2" parent="customNumberButtons">
+    </style>
+
+    <style name="ButtonFontSizeSmall" parent="customNumberButtons">
         <item name="android:textSize">12dp</item>
     </style>
 
-    <style name="FontSizeMedium" parent="customNumberButtons">
+    <style name="ButtonFontSizeMedium" parent="customNumberButtons">
         <item name="android:textSize">22dp</item>
     </style>
 
-    <style name="FontSizeLarge" parent="customNumberButtons">
+    <style name="ButtonFontSizeLarge" parent="customNumberButtons">
         <item name="android:textSize">30dp</item>
+    </style>
+
+
+    <style name="DisplayFontSizeSmall" parent="customNumberButtons">
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="DisplayFontSizeMedium" parent="customNumberButtons">
+        <item name="android:textSize">32dp</item>
+    </style>
+
+    <style name="DisplayFontSizeLarge" parent="customNumberButtons">
+        <item name="android:textSize">40dp</item>
     </style>
 
 
