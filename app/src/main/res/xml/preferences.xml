@@ -15,14 +15,4 @@
             android:title="Displaygröße"
             />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="Themes">
-        <ListPreference
-            android:entries="@array/listThemesOptions"
-            android:entryValues="@array/listThemesValues"
-            android:key="pref_key_theme"
-            android:title="Theme"/>
-
-
-    </PreferenceCategory>
 </PreferenceScreen>

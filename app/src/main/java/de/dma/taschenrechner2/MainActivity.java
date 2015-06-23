@@ -41,8 +41,6 @@ public class MainActivity extends Activity implements SensorEventListener{
     Sensor mAccelerometer;
     int buttonFontSize = R.style.ButtonFontSizeMedium;
     int displayFontSize = R.style.DisplayFontSizeMedium;
-    int themeStyleNumberButtons = R.style.customNumberButtons;
-    int themeStyleButtons = R.style.customButtons;
     private static final int RESULT_SETTINGS = 1;
 
     @Override
@@ -127,29 +125,11 @@ public class MainActivity extends Activity implements SensorEventListener{
 
         String buttonTextSize = sharedPreferences.getString("pref_key_buttons", String.valueOf(buttonFontSize));
         String displayTextSize = sharedPreferences.getString("pref_key_display", String.valueOf(displayFontSize));
-        String theme = sharedPreferences.getString("pref_key_theme", String.valueOf(themeStyleNumberButtons));
 
         setTextButton(Integer.parseInt(buttonTextSize));
         setTextDisplay(Integer.parseInt(displayTextSize));
-        //setThemeStyle(Integer.parseInt(theme));
     }
 
-    private void setThemeStyle(int i)
-    {
-        switch (i)
-        {
-            case 1:
-                themeStyleNumberButtons = R.style.customNumberButtons;
-                themeStyleButtons = R.style.customButtons;
-                break;
-            case 2:
-                themeStyleNumberButtons = R.style.customNumberButtons2;
-                themeStyleButtons = R.style.customButtons2;
-                break;
-        }
-
-
-    }
     private void setTextDisplay(int i)
     {
         switch (i)
