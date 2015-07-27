@@ -41,6 +41,7 @@ public class MainActivity extends Activity implements SensorEventListener{
     Sensor mAccelerometer;
     int buttonFontSize = R.style.ButtonFontSizeMedium;
     int displayFontSize = R.style.DisplayFontSizeMedium;
+    String buttonTextSize, displayTextSize;
     private static final int RESULT_SETTINGS = 1;
 
     @Override
@@ -123,8 +124,8 @@ public class MainActivity extends Activity implements SensorEventListener{
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
-        String buttonTextSize = sharedPreferences.getString("pref_key_buttons", String.valueOf(buttonFontSize));
-        String displayTextSize = sharedPreferences.getString("pref_key_display", String.valueOf(displayFontSize));
+        buttonTextSize = sharedPreferences.getString("pref_key_buttons", String.valueOf(buttonFontSize));
+        displayTextSize = sharedPreferences.getString("pref_key_display", String.valueOf(displayFontSize));
 
         setTextButton(Integer.parseInt(buttonTextSize));
         setTextDisplay(Integer.parseInt(displayTextSize));
@@ -176,6 +177,7 @@ public class MainActivity extends Activity implements SensorEventListener{
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("DISPLAY_TEXT", textView.getText().toString());
+        outState.putInt("DISPLAY_SIZE", displayFontSize);
         outState.putInt("BUTTON_SIZE", buttonFontSize );
 
     }
@@ -184,6 +186,7 @@ public class MainActivity extends Activity implements SensorEventListener{
         super.onRestoreInstanceState(savedInstanceState);
         textView.setText(savedInstanceState.getString("DISPLAY_TEXT"));
         setTextButton(savedInstanceState.getInt("BUTTON_SIZE"));
+        setTextDisplay(savedInstanceState.getInt("DISPLAY_SIZE"));
     }
 
 
